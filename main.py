@@ -34,13 +34,13 @@ class Player:
         self.frame2 = ttk.Frame(self.window)
         self.frame2.pack(pady=10)
 
-        self.previus = ttk.Button(self.frame2, image=self.img_previus)
+        self.previus = ttk.Button(self.frame2, image=self.img_previus, command=self.previus_music)
         self.previus.grid(row=0, column=0)
 
         self.play = ttk.Button(self.frame2, image=self.img_play)
         self.play.grid(row=0, column=1)
 
-        self.next = ttk.Button(self.frame2, image=self.img_next)
+        self.next = ttk.Button(self.frame2, image=self.img_next, command=self.next_music)
         self.next.grid(row=0, column=2)
 
         self.volume = ttk.Scale(self.window)
@@ -57,5 +57,12 @@ class Player:
 
     def delete_music(self):
         self.list.delete(ANCHOR)
+
+    def next_music(self):
+        index = self.list.curselection()[0] + 1
+
+    def previus_music(self):
+        index = self.list.curselection()[0] - 1
+
 
 Player()
