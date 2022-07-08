@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from ttkthemes import ThemedTk
 from tkinter import filedialog
+import os
 
 class Player:
     def __init__(self):
@@ -18,7 +19,7 @@ class Player:
         self.img_previus = PhotoImage(file="assets/previus.png")
         self.img_remove = PhotoImage(file="assets/remove.png")
 
-        self.list = Listbox(self.window, bg="#333333", height=13)
+        self.list = Listbox(self.window, bg="#333333", height=13, fg="gray", font="arial 12")
         self.list.pack(fill=X, padx=10, pady=10)
 
         self.frame = ttk.Frame(self.window)
@@ -49,6 +50,8 @@ class Player:
 
     def select_music(self):
         local = filedialog.askdirectory()
-        print(local)
+        file = os.listdir(local)
 
+        for arquivo in file:
+            self.list.insert(END, str(arquivo))
 Player()
