@@ -13,6 +13,15 @@ class Player:
         self.list = Listbox(self.window, bg="#444444")
         self.list.pack(fill=X, padx=10, pady=10)
 
+        self.frame = ttk.Frame(self.window)
+        self.frame.pack()
+
+        self.remove = ttk.Button(self.frame)
+        self.remove.grid(row=0, column=0)
+
+        self.add = ttk.Button(self.frame)
+        self.add.grid(row=0, column=1)
+
         self.window.mainloop()
 
 Player()
