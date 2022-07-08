@@ -25,7 +25,7 @@ class Player:
         self.frame = ttk.Frame(self.window)
         self.frame.pack(pady=10)
 
-        self.remove = ttk.Button(self.frame, image=self.img_remove)
+        self.remove = ttk.Button(self.frame, image=self.img_remove, command=self.delete_music)
         self.remove.grid(row=0, column=0, padx=10)
 
         self.add = ttk.Button(self.frame, image=self.img_add, command=self.select_music)
@@ -54,4 +54,8 @@ class Player:
 
         for arquivo in file:
             self.list.insert(END, str(arquivo))
+
+    def delete_music(self):
+        self.list.delete(ANCHOR)
+
 Player()
