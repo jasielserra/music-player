@@ -10,8 +10,8 @@ class Player:
         self.window.geometry("300x400+800+300")
         self.window.config(bg="#333333")
 
-        self.btn = ttk.Button(self.window)
-        self.btn.pack()
+        self.list = Listbox(self.window, bg="#444444")
+        self.list.pack(fill=X, padx=10, pady=10)
 
         self.window.mainloop()
 
