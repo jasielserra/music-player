@@ -64,23 +64,32 @@ class Player:
         self.list.delete(ANCHOR)
 
     def next_music(self):
-        index = self.list.curselection()[0] + 1
-        self.list.select_clear(0, END)
-        self.list.activate(index)
-        self.list.select_set(index)
-        self.list.yview(index)
+        try:
+            index = self.list.curselection()[0] + 1
+            self.list.select_clear(0, END)
+            self.list.activate(index)
+            self.list.select_set(index)
+            self.list.yview(index)
+        except:
+            self.error_window("They aren't not next music.")
+
 
     def previus_music(self):
-        index = self.list.curselection()[0] - 1
-        self.list.select_clear(0, END)
-        self.list.activate(index)
-        self.list.select_set(index)
-        self.list.yview(index)
+        try:
+            index = self.list.curselection()[0] - 1
+            self.list.select_clear(0, END)
+            self.list.activate(index)
+            self.list.select_set(index)
+            self.list.yview(index)
+        except:
+            self.error_window(("They aren't not previous music."))
 
     def play_music(self):
-       # pygame.mixer.music.load(str(self.local) + "/" + str(self.list.get(ANCHOR)))
-       # pygame.mixer.music.play()
-        self.error_window("Tudo Certo")
+        try:
+            pygame.mixer.music.load(str(self.local) + "/" + str(self.list.get(ANCHOR)))
+            pygame.mixer.music.play()
+        except:
+            self.error_window("Music Not Valid!")
 
     def error_window(self, message):
         window = Toplevel()
@@ -89,8 +98,8 @@ class Player:
         window.resizable(0,0)
         window.config(bg="#444444")
 
-        text = ttk.Label(window, text=str(message))
-        text.pack()
+        text = ttk.Label(window, text=str(message), font="arial 20")
+        text.pack(expand=YES)
 
         btn = ttk.Button(window, text="OK", command=window.destroy)
         btn.pack()
