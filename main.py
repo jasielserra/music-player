@@ -3,9 +3,11 @@ from tkinter import ttk
 from ttkthemes import ThemedTk
 from tkinter import filedialog
 import os
+import pygame
 
 class Player:
     def __init__(self):
+        pygame.mixer.init()
         self.window = ThemedTk(theme="equilux")
         self.window.title("Music Player")
         self.window.resizable(0,0)
@@ -18,6 +20,8 @@ class Player:
         self.img_play = PhotoImage(file="assets/play.png")
         self.img_previus = PhotoImage(file="assets/previus.png")
         self.img_remove = PhotoImage(file="assets/remove.png")
+
+        self.local = ""
 
         self.list = Listbox(self.window, bg="#333333", height=13, fg="gray", font="arial 12")
         self.list.pack(fill=X, padx=10, pady=10)
@@ -37,7 +41,7 @@ class Player:
         self.previus = ttk.Button(self.frame2, image=self.img_previus, command=self.previus_music)
         self.previus.grid(row=0, column=0)
 
-        self.play = ttk.Button(self.frame2, image=self.img_play)
+        self.play = ttk.Button(self.frame2, image=self.img_play, command=self.play_music)
         self.play.grid(row=0, column=1)
 
         self.next = ttk.Button(self.frame2, image=self.img_next, command=self.next_music)
@@ -49,8 +53,8 @@ class Player:
         self.window.mainloop()
 
     def select_music(self):
-        local = filedialog.askdirectory()
-        file = os.listdir(local)
+        self.local = filedialog.askdirectory()
+        file = os.listdir(self.local)
 
         for arquivo in file:
             self.list.insert(END, str(arquivo))
@@ -60,9 +64,19 @@ class Player:
 
     def next_music(self):
         index = self.list.curselection()[0] + 1
+        self.list.select_clear(0, END)
+        self.list.activate(index)
+        self.list.select_set(index)
 
     def previus_music(self):
         index = self.list.curselection()[0] - 1
+        self.list.select_clear(0, END)
+        self.list.activate(index)
+        self.list.select_set(index)
+
+    def play_music(self):
+        pygame.mixer.music.load(str(self.local) + "/" + str(self.list.get(ANCHOR)))
+        pygame.mixer.music.play()
 
 
 Player()
