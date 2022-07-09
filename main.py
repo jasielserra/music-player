@@ -23,7 +23,8 @@ class Player:
 
         self.local = ""
 
-        self.list = Listbox(self.window, bg="#333333", height=13, fg="gray", font="arial 12")
+        self.list = Listbox(self.window, bg="#333333", height=13, fg="gray", font="arial 12",
+                            selectbackground="#6868e6")
         self.list.pack(fill=X, padx=10, pady=10)
 
         self.frame = ttk.Frame(self.window)
