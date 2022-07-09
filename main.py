@@ -68,12 +68,14 @@ class Player:
         self.list.select_clear(0, END)
         self.list.activate(index)
         self.list.select_set(index)
+        self.list.yview(index)
 
     def previus_music(self):
         index = self.list.curselection()[0] - 1
         self.list.select_clear(0, END)
         self.list.activate(index)
         self.list.select_set(index)
+        self.list.yview(index)
 
     def play_music(self):
         pygame.mixer.music.load(str(self.local) + "/" + str(self.list.get(ANCHOR)))
