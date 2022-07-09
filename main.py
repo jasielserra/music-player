@@ -22,6 +22,7 @@ class Player:
         self.img_remove = PhotoImage(file="assets/remove.png")
 
         self.local = ""
+        self.status = 0
 
         self.list = Listbox(self.window, bg="#333333", height=13, fg="gray", font="arial 12",
                             selectbackground="#6868e6")
@@ -86,8 +87,15 @@ class Player:
 
     def play_music(self):
         try:
-            pygame.mixer.music.load(str(self.local) + "/" + str(self.list.get(ANCHOR)))
-            pygame.mixer.music.play()
+            if self.status == 0:
+                pygame.mixer.music.load(str(self.local) + "/" + str(self.list.get(ANCHOR)))
+                pygame.mixer.music.play()
+                self.play.config(image=self.img_pause)
+                self.status = 1
+            else:
+                pygame.mixer.music.pause()
+                self.play.config(image=self.img_play)
+                self.status = 0
         except:
             self.error_window("Music Not Valid!")
 
