@@ -78,8 +78,22 @@ class Player:
         self.list.yview(index)
 
     def play_music(self):
-        pygame.mixer.music.load(str(self.local) + "/" + str(self.list.get(ANCHOR)))
-        pygame.mixer.music.play()
+       # pygame.mixer.music.load(str(self.local) + "/" + str(self.list.get(ANCHOR)))
+       # pygame.mixer.music.play()
+        self.error_window("Tudo Certo")
+
+    def error_window(self, message):
+        window = Toplevel()
+        window.title("ERROR")
+        window.geometry("300x300+300+300")
+        window.resizable(0,0)
+        window.config(bg="#444444")
+
+        text = ttk.Label(window, text=str(message))
+        text.pack()
+
+        btn = ttk.Button(window, text="OK", command=window.destroy)
+        btn.pack()
 
 
 Player()
